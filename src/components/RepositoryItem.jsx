@@ -1,5 +1,6 @@
 import { View, StyleSheet, Image } from 'react-native';
-import SubHeading from './SubHeading'
+
+import SubHeading from './SubHeading';
 import Text from './Text';
 import theme from '../theme';
 

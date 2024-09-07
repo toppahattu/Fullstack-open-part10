@@ -1,23 +1,30 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
-import theme from '../theme';
+
 import AppBarTab from './AppBarTab';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
     backgroundColor: theme.colors.appBar,
+  },
+  scrollContainer: {
+    display: 'flex',
     flexDirection: 'row',
   },
   flexItem: {
-    padding: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 10,
   }
 });
 
 const AppBar = ({ items }) => {
   return (
     <View style={styles.container}>
-      {items.map((item, index) => <AppBarTab key={index} item={item} style={styles.flexItem} />)}
+      <ScrollView horizontal style={styles.scrollContainer}>
+        {items.map((item, index) => <AppBarTab key={index} item={item} style={styles.flexItem} />)}
+      </ScrollView>
     </View>
   );
 };
