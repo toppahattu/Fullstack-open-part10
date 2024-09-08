@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   flexItem: {
     paddingVertical: 15,
     paddingHorizontal: 10,
+    marginTop: 10,
   }
 });
 
