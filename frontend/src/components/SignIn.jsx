@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { useNavigate } from 'react-router-native';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -43,14 +44,24 @@ const SignIn = () => {
     password: '',
   };
 
-  const [signIn] = useSignIn(); 
+  const [signIn, result] = useSignIn();
+  if (result.loading)  {
+    return <Text>loading...</Text>
+  }
+
+  const navigate = useNavigate();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
 
     try{
       const data = await signIn({ username, password });
-      console.log('login success', data);
+      if (data?.authenticate?.accessToken) {
+        console.log('login success', data);
+        navigate('/');
+      } else {
+        console.log('login failure: no access token received')
+      }
     } catch (e) {
       console.log('login failure', e);
     }
@@ -83,7 +94,7 @@ const SignIn = () => {
             formik.touched.username && formik.errors.username && styles.inputTextError
           ]}
         />
-        {formik.touched.username && formik.touched.password && (
+        {formik.touched.username && formik.errors.username && (
           <Text color='error'>{formik.errors.username}</Text>
         )}
       </View>
@@ -98,7 +109,7 @@ const SignIn = () => {
             formik.touched.password && formik.errors.password && styles.inputTextError
           ]}
         />
-        {formik.touched.username && formik.touched.password && (
+        {formik.touched.password && formik.errors.password && (
           <Text color='error'>{formik.errors.password}</Text>
         )}
       </View>      
