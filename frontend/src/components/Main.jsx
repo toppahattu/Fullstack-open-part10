@@ -8,8 +8,9 @@ import theme from '../theme';
 
 const Main = () => {
   const appBarItems = [
-    ['Repositories','/'],
-    ['Sign in', 'login']
+    ['Repositories', '/'],
+    ['Sign in', 'login'],
+    ['Sign out', '/'],
   ];
 
   return (

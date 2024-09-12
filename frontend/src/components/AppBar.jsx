@@ -1,8 +1,11 @@
 import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
+import { useNavigate } from 'react-router-native';
 
 import AppBarTab from './AppBarTab';
 import theme from '../theme';
+import useMe from '../hooks/useMe';
+import useSignOut from '../hooks/useSignOut';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,10 +24,31 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = ({ items }) => {
+  const { id, username } = useMe();
+  const signOut = useSignOut();
+  const navigate = useNavigate();
+
+  const filteredItems = id && username
+  ? items.filter(item => item[0] !== 'Sign in')
+  : items.filter(item => item[0] !== 'Sign out');
+
+  const handleSignOut = async () => {
+    if (id && username) {
+      await signOut();
+      navigate('/');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView horizontal style={styles.scrollContainer}>
-        {items.map((item, index) => <AppBarTab key={index} item={item} style={styles.flexItem} />)}
+        {filteredItems.map((item, index) => (
+          <AppBarTab
+            key={index}
+            item={item}
+            style={styles.flexItem}
+            signOut={item[0] === 'Sign out' ? handleSignOut : undefined} />
+          ))}
       </ScrollView>
     </View>
   );

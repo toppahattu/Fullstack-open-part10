@@ -13,3 +13,10 @@ export const REPOSITORY_DETAILS = gql`
     stargazersCount
   }
 `
+
+export const ME_DETAILS = gql`
+  fragment MeDetails on User {
+    id
+    username
+  }
+`

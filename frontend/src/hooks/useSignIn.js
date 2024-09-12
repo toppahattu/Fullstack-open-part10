@@ -19,8 +19,7 @@ const useSignIn = () => {
         },
       });
       if (data && data.authenticate && data.authenticate.accessToken) {
-        try {      
-          console.log('token is: ', data.authenticate.accessToken)
+        try {
           await authStorage.setAccessToken(data.authenticate.accessToken)
         } catch (e) {
           console.log(e);

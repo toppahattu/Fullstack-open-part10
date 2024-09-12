@@ -39,17 +39,13 @@ const styles = StyleSheet.create({
 });
 
 const SignIn = () => {
+  const [signIn, result] = useSignIn();  
+  const navigate = useNavigate();
+
   const initialValues = {
     username: '',
     password: '',
   };
-
-  const [signIn, result] = useSignIn();
-  if (result.loading)  {
-    return <Text>loading...</Text>
-  }
-
-  const navigate = useNavigate();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
@@ -57,7 +53,7 @@ const SignIn = () => {
     try{
       const data = await signIn({ username, password });
       if (data?.authenticate?.accessToken) {
-        console.log('login success', data);
+        console.log('login success, accessToken: ', data.authenticate.accessToken);
         navigate('/');
       } else {
         console.log('login failure: no access token received')
@@ -81,6 +77,10 @@ const SignIn = () => {
     onSubmit,
     validationSchema,
   });
+
+  if (result.loading)  {
+    return <Text>loading...</Text>
+  }
 
   return (
     <View style={styles.container}>

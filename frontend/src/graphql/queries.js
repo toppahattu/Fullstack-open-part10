@@ -1,9 +1,18 @@
 import { gql } from '@apollo/client';
 
-import { REPOSITORY_DETAILS } from './fragments';
+import { ME_DETAILS, REPOSITORY_DETAILS } from './fragments';
+
+export const GET_ME = gql`
+  query Me {
+    me {
+      ...MeDetails
+    }
+  }
+  ${ME_DETAILS}
+`
 
 export const GET_REPOSITORIES = gql`
-  query Repositories{
+  query Repositories {
     repositories {
       edges {
         cursor
