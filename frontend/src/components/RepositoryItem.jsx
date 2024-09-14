@@ -1,4 +1,5 @@
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Pressable } from 'react-native';
+import * as Linking from 'expo-linking';
 
 import SubHeading from './SubHeading';
 import Text from './Text';
@@ -40,9 +41,21 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginTop: 5,
   },
+  buttonContainer: {
+    marginVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  urlButton: {
+    backgroundColor: theme.colors.primary,
+    borderRadius: 4,
+    padding: 15,
+    alignItems: 'center',
+    width: '90%',
+  },
 });
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, showButton }) => {
   return (
     <View style={styles.container}>
       <View style={styles.upperPart}>
@@ -78,7 +91,18 @@ const RepositoryItem = ({ item }) => {
           <SubHeading>{item.ratingAverage > 999 ? Number((item.ratingAverage / 1000).toFixed(1)) + 'k' : item.ratingAverage}</SubHeading>
           <Text color='textSecondary'>Rating</Text>
         </View>
-      </View>      
+      </View>
+      {showButton
+        ? <View style={styles.buttonContainer}>
+            <Pressable
+              onPress={() => Linking.openURL(item.url)}
+              color='primary'
+              style={styles.urlButton}
+            >
+              <Text color='appBarText' fontWeight='bold'>Open in Github</Text>
+            </Pressable>
+          </View>
+        : null}
     </View>
   );
 };
