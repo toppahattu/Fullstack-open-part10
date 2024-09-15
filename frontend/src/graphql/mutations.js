@@ -34,3 +34,12 @@ export const CREATE_REVIEW = gql`
   ${ME_DETAILS}
   ${REPOSITORY_DETAILS}
 `;
+
+export const CREATE_USER = gql`
+mutation CreateUser($user: CreateUserInput) {
+  createUser(user: $user) {
+    ...MeDetails
+  }
+}
+${ME_DETAILS}
+`;

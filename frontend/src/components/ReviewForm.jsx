@@ -1,43 +1,11 @@
-import { Pressable, StyleSheet, TextInput, View } from "react-native";
+import { Pressable, TextInput, View } from "react-native";
 import { useNavigate } from "react-router-native";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
 import Text from "./Text";
-import theme from "../theme";
+import formStyles from "../themes/formStyles";
 import useCreateReview from "../hooks/useCreateReview";
-
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    backgroundColor: 'white',
-    padding: 20,
-    justifyContent: 'center'
-  },
-  inputContainer: {
-    marginVertical: 10,
-  },
-  inputText: {
-    borderWidth: 1,
-    borderColor: theme.colors.appBar,
-    padding: 10,
-    borderRadius: 4,
-  },
-  inputTextError: {
-    borderColor: theme.colors.error,
-  },
-  submitContainer: {
-    marginVertical: 10,
-  },
-  submitButton: {
-    backgroundColor: theme.colors.primary,
-    borderRadius: 4,
-    padding: 15,
-    alignItems: 'center',
-    width: '100%',
-  },
-});
 
 const ReviewForm = () => {
   const [makeReview, result] = useCreateReview();
@@ -98,50 +66,50 @@ const ReviewForm = () => {
   }
 
   return(
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
+    <View style={formStyles.container}>
+      <View style={formStyles.inputContainer}>
         <TextInput
           placeholder='Repository owner name'
           value={formik.values.ownerName}
           onChangeText={formik.handleChange('ownerName')}
           style={[
-            styles.inputText,
-            formik.touched.ownerName && formik.errors.ownerName && styles.inputTextError
+            formStyles.inputText,
+            formik.touched.ownerName && formik.errors.ownerName && formStyles.inputTextError
           ]}
         />
         {formik.touched.ownerName && formik.errors.ownerName && (
           <Text color='error'>{formik.errors.ownerName}</Text>
         )}
       </View>
-      <View style={styles.inputContainer}>
+      <View style={formStyles.inputContainer}>
         <TextInput
           placeholder='Repository name'
           value={formik.values.repositoryName}
           onChangeText={formik.handleChange('repositoryName')}
           style={[
-            styles.inputText,
-            formik.touched.repositoryName && formik.errors.repositoryName && styles.inputTextError
+            formStyles.inputText,
+            formik.touched.repositoryName && formik.errors.repositoryName && formStyles.inputTextError
           ]}
         />
         {formik.touched.repositoryName && formik.errors.repositoryName && (
           <Text color='error'>{formik.errors.repositoryName}</Text>
         )}
       </View>
-      <View style={styles.inputContainer}>
+      <View style={formStyles.inputContainer}>
         <TextInput
           placeholder='Rating between 0 and 100'
           value={formik.values.rating}
           onChangeText={formik.handleChange('rating')}
           style={[
-            styles.inputText,
-            formik.touched.rating && formik.errors.rating && styles.inputTextError
+            formStyles.inputText,
+            formik.touched.rating && formik.errors.rating && formStyles.inputTextError
           ]}
         />
         {formik.touched.rating && formik.errors.rating && (
           <Text color='error'>{formik.errors.rating}</Text>
         )}
       </View>
-      <View style={styles.inputContainer}>
+      <View style={formStyles.inputContainer}>
         <TextInput
           placeholder='Review'
           value={formik.values.text}
@@ -149,16 +117,16 @@ const ReviewForm = () => {
           multiline
           textAlignVertical="top"
           style={[
-            styles.inputText,
-            formik.touched.text && formik.errors.text && styles.inputTextError
+            formStyles.inputText,
+            formik.touched.text && formik.errors.text && formStyles.inputTextError
           ]}
         />
         {formik.touched.text && formik.errors.text && (
           <Text color='error'>{formik.errors.text}</Text>
         )}
       </View>
-      <View style={styles.submitContainer}>
-        <Pressable onPress={formik.handleSubmit} style={styles.submitButton}>
+      <View style={formStyles.submitContainer}>
+        <Pressable onPress={formik.handleSubmit} style={formStyles.submitButton}>
           <Text color='appBarText' fontWeight='bold'>Create a review</Text>
         </Pressable>
       </View>

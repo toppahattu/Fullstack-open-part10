@@ -3,7 +3,7 @@ import Constants from 'expo-constants';
 import { useNavigate } from 'react-router-native';
 
 import AppBarTab from './AppBarTab';
-import theme from '../theme';
+import theme from '../themes/theme';
 import useMe from '../hooks/useMe';
 import useSignOut from '../hooks/useSignOut';
 
@@ -29,7 +29,7 @@ const AppBar = ({ items }) => {
   const navigate = useNavigate();
 
   const filteredItems = id && username
-  ? items.filter(item => item[0] !== 'Sign in')
+  ? items.filter(item => item[0] !== 'Sign in' && item[0] !== 'Sign up')
   : items.filter(item => item[0] !== 'Sign out' && item[0] !== 'Create a review');
 
   const handleSignOut = async () => {

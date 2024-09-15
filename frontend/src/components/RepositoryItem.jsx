@@ -3,7 +3,7 @@ import * as Linking from 'expo-linking';
 
 import SubHeading from './SubHeading';
 import Text from './Text';
-import theme from '../theme';
+import theme from '../themes/theme';
 
 const styles = StyleSheet.create({
   container: {
