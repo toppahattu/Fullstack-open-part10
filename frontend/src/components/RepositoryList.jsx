@@ -15,7 +15,7 @@ const RepositoryList = () => {
     : [];
 
   const handlePress = (id) => {
-    navigate(`/${id}`);
+    navigate(`/repository/${id}`);
   }
 
   if (loading)  {

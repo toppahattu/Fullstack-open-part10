@@ -30,7 +30,7 @@ const AppBar = ({ items }) => {
 
   const filteredItems = id && username
   ? items.filter(item => item[0] !== 'Sign in')
-  : items.filter(item => item[0] !== 'Sign out');
+  : items.filter(item => item[0] !== 'Sign out' && item[0] !== 'Create a review');
 
   const handleSignOut = async () => {
     if (id && username) {
