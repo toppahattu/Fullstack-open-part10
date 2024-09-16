@@ -115,7 +115,7 @@ const ReviewForm = () => {
           value={formik.values.text}
           onChangeText={formik.handleChange('text')}
           multiline
-          textAlignVertical="top"
+          verticalAlign="top"
           style={[
             formStyles.inputText,
             formik.touched.text && formik.errors.text && formStyles.inputTextError

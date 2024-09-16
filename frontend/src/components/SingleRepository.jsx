@@ -26,7 +26,7 @@ const SingleRepository = () => {
   return (
     <FlatList
       data={reviews}
-      ItemSeparatorComponent={ItemSeparator}
+      ItemSeparatorComponent={<ItemSeparator />}
       renderItem={({ item }) => (
         <ReviewItem review={item} />
       )}
