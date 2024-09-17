@@ -1,21 +1,22 @@
+import React from 'react';
 import { useState } from 'react';
-import { FlatList, Pressable } from 'react-native';
+import { useDebounce } from 'use-debounce';
 import { useNavigate } from 'react-router-native';
 
-import ItemSeparator from './ItemSeparator';
-import OrderingMenu from './OrderingMenu';
-import RepositoryItem from './RepositoryItem';
+import RepositoryListContainer from './RepositoryListContainer';
 import Text from './Text';
 import useRepositories from '../hooks/useRepositories';
 
 const RepositoryList = () => {
   const [ordering, setOrdering] = useState("latest");
+  const [filter, setFilter] = useState("");
+  const [debouncedFilter] = useDebounce(filter, 500);
   const orders = {
     latest: { orderBy: "CREATED_AT", orderDirection: "DESC" },
     highest: { orderBy: "RATING_AVERAGE", orderDirection: "DESC" },
     lowest: { orderBy: "RATING_AVERAGE", orderDirection: "ASC" },
   };
-  const variables = orders[ordering];
+  const variables = { ...orders[ordering], searchKeyword: debouncedFilter };
   const {repositories, loading } = useRepositories(variables);
   const navigate = useNavigate();
 
@@ -32,16 +33,13 @@ const RepositoryList = () => {
   }
 
   return (
-    <FlatList
-      data={repositoryNodes}
-      ItemSeparatorComponent={<ItemSeparator />}
-      renderItem={({ item }) => (
-        <Pressable onPress={() => handlePress(item.id)}>
-          <RepositoryItem item={item} />
-        </Pressable>
-      )}
-      keyExtractor={item => item.id}
-      ListHeaderComponent={<OrderingMenu ordering={ordering} setOrdering={setOrdering} />}
+    <RepositoryListContainer
+      repositoryNodes={repositoryNodes}
+      handlePress={handlePress}
+      ordering={ordering}
+      setOrdering={setOrdering}
+      filter={filter}
+      setFilter={setFilter}
     />
   );
 };

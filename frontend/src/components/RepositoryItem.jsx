@@ -1,3 +1,4 @@
+import React from 'react';
 import { View, StyleSheet, Image, Pressable } from 'react-native';
 import * as Linking from 'expo-linking';
 

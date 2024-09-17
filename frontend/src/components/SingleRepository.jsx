@@ -1,3 +1,4 @@
+import React from 'react';
 import { FlatList, View } from "react-native";
 import { useParams } from "react-router-native";
 

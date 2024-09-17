@@ -1,3 +1,4 @@
+import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { useNavigate } from 'react-router-native';

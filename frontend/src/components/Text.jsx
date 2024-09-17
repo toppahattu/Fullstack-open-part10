@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text as NativeText, Platform, StyleSheet } from 'react-native';
 
 import theme from '../themes/theme';
